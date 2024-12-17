@@ -1,0 +1,62 @@
+﻿@{
+    ViewData["Title"] = "Customer - ";
+}
+
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-2 text-gray-800">Customers</h1>
+    @* <div class="d-sm-flex align-items-right">
+        <a href="<%= request.getAttribute(" excelLink")%>" style="visibility: hidden;"  id="downloadLink" download></a>
+        <button class="btn btn-sm btn-primary shadow-sm" type="button" style="float: right; margin: 5px">
+            <a href="newCustomer" style="text-decoration: none">
+                <h6 class="m-0 text-white">
+                    Add new Customer
+                </h6>
+            </a>
+        </button>
+        <a href="ManageCustomerServlet?mode=exportCustomerList"
+           class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"
+           style="margin: 5px"
+           onclick="document.getElementById('downloadLink').click()"><i class="fas fa-download fa-sm text-white-50"></i> Export Excel</a>
+    </div> *@
+</div>
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">
+            List of Customers
+        </h6>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered"
+                   id="dataTable"
+                   width="100%"
+                   cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Customer Code</th>
+                        <th>Customer Name</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <th>Customer Code</th>
+                        <th>Customer Name</th>
+                        <th>Description</th>
+                    </tr>
+                </tfoot>
+                <tbody>
+                    @foreach (var customer in ViewBag.Customers)
+                    {
+                    <tr class="customerRow">
+                        <td>@customer.CustomerCode</td>
+                        <td>@customer.CustomerName</td>
+                        <td>@customer.Description</td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

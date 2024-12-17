@@ -1,0 +1,92 @@
+﻿@model StoredProduct
+
+@{
+    ViewData["Title"] = "Edit Product - ";
+}
+
+<div class="container-fluid mx-auto" style="width: 50%">
+    <h1 class="h3 mb-4 text-gray-800">Edit Product</h1>
+    <form asp-action="EditProduct" method="post" >
+        <input type="hidden" value="@Model.ProductID" name="ProductID" id="ProductID"/>
+        <div class="mb-3">
+            <label for="ProductCode" class="form-label">Product Code:</label>
+            <input type="text" class="form-control" id="ProductCode" name="ProductCode" value="@Model.ProductCode" required>
+        </div>
+        <div class="mb-3">
+            <label for="ProductName" class="form-label">Product Name:</label>
+            <input type="text" class="form-control" id="ProductName" name="ProductName" value="@Model.ProductName" required>
+        </div>
+        <div class="mb-3">
+            <label for="ProductUnit" class="form-label">Product Unit:</label>
+            <input type="text" class="form-control" id="ProductUnit" name="ProductUnit" value="@Model.ProductUnit" required>
+        </div>
+        <div class="row">
+            <div class="mb-3 col-6">
+                <label for="CustomerID" class="form-label">Customer Name:</label><br>
+                <select class="form-select form-select-lg w-30 rounded" id="CustomerID" name="CustomerID">
+                    @foreach (var customer in ViewBag.Customers)
+                    {
+                        <option value="@customer.CustomerID"
+                                selected="@(Model?.CustomerID == customer.CustomerID ? "selected" : "")">
+                            @customer.CustomerName
+                        </option>
+                    }
+                </select>
+            </div>
+            <div class="mb-3 col-6">
+                <label for="StaffID" class="form-label">Staff Name:</label><br>
+                <select class="form-select form-select-lg w-30 rounded" id="StaffID" name="StaffID">
+                    @foreach (var staff in ViewBag.Staffs)
+                    {
+                        <option value="@staff.StaffID"
+                                selected="@(Model?.StaffID == staff.StaffID ? "selected" : "")">
+                            @staff.StaffName
+                        </option>
+                    }
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="mb-3 col-6">
+                <label for="RFID" class="form-label">RFID:</label><br>
+                <select class="form-select form-select-lg w-30 rounded" name="RFID" aria-label="Default select example" id="RFID">
+                    @foreach (var warehouse in ViewBag.Warehouses)
+                    {
+                        <option value="@warehouse.RFID"
+                                selected="@(Model?.RFID == warehouse.RFID ? "selected" : "")">
+                            @warehouse.RFID
+                        </option>
+                    }
+                </select>
+            </div>
+            <div class="mb-3 col-6">
+                <label for="Status" class="form-label">Status:</label><br>
+                <select class="form-select form-select-lg w-30 rounded" name="Status" aria-label="Default select example" id="Status">
+                    @if (Model.Status.Equals("OK"))
+                    {
+                        <option class="rounded" value="OK" selected="selected">OK</option>
+                        <option class="rounded" value="WAITING">Waiting</option>
+                    }
+                    else
+                    {
+                        <option class="rounded" value="OK">OK</option>
+                        <option class="rounded" value="WAITING" selected="selected">Waiting</option>
+                    }
+                </select>
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="InTime" class="form-label">Import Time:</label>
+            <input type="text" class="form-control" id="InTime" value="@Model.InTime" name="InTime" placeholder="dd-MM-yyyy hh:mm:ss">
+        </div>
+        <div class="mb-3">
+            <label for="OutTime" class="form-label">Export Time:</label>
+            <input type="text" class="form-control" id="OutTime" value="@Model.OutTime" name="OutTime" placeholder="dd-MM-yyyy hh:mm:ss">
+        </div> 
+        <div class="mb-3">
+            <label for="Description" class="form-label">Description:</label>
+            <input type="text" class="form-control" id="Description" name="Description" value="@Model.Description">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>

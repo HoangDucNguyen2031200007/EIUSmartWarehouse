@@ -1,0 +1,69 @@
+﻿@{
+    ViewData["Title"] = "Warehouse - ";
+}
+
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-2 text-gray-800">Warehouse</h1>
+@*     <div class="d-sm-flex align-items-center">
+        <a href="<%= request.getAttribute(" excelLink")%>" style="visibility: hidden;"  id="downloadLink" download></a>
+        <button class="btn btn-sm btn-primary shadow-sm" type="button" style="margin: 5px; padding: 5px">
+            <a href="newWarehouse" style="text-decoration: none">
+                <h6 class="m-0 text-white">
+                    Add new block
+                </h6>
+            </a>
+        </button>
+        <a href="ManageWarehouseServlet?mode=exportWarehouse"
+           class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"
+           style="margin: 5px"
+           onclick="document.getElementById('downloadLink').click()"><i class="fas fa-download fa-sm text-white-50"></i> Export Excel</a>
+        <form action="ManageWarehouseServlet?mode=importWarehouse" id="form" method="POST" enctype="multipart/form-data">
+            <label class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" for="upload" style="margin: 5px">
+                <i class="fas fa-download fa-sm text-white-50"></i> Import Excel
+            </label>
+            <input type="file" id="upload" name="upload" style="display: none" />
+        </form>
+    </div>
+    <input type="file" id="upload" name="upload" style="display:none" /> *@
+</div>
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">
+            List of Blocks
+        </h6>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered"
+                   id="dataTable"
+                   width="100%"
+                   cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>RFID</th>
+                        <th>Location Status</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <th>RFID</th>
+                        <th>Location Status</th>
+                        <th>Description</th>
+                    </tr>
+                </tfoot>
+                <tbody>
+                    @foreach (var warehouse in ViewBag.Warehouses)
+                    {
+                        <tr class="warehouseRow">
+                            <td>@warehouse.RFID</td>
+                            <td>@warehouse.Location_status</td>
+                            <td>@warehouse.Description</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
